@@ -1,6 +1,5 @@
 use crate::error::CustomError;
 use ajson::Value;
-use std::ops::Deref;
 
 pub mod detective;
 pub mod error;
@@ -27,7 +26,6 @@ mod test_utils;
 // For parse_field()
 pub trait FromValue
 where
-    // @Christos: What is Sized trait? Why does it need to be here? Also, how do you "say" this - is this a trait bound to
     Self: Sized,
 {
     fn from_value(value: &Value) -> Result<Self, CustomError>;
@@ -41,13 +39,12 @@ impl FromValue for f64 {
     }
 }
 
-// // Q-1: How do I do this?
-// // Q-2: How do I default this?
-impl FromValue for Value {
-    fn from_value(value: &Value) -> Result<Self, CustomError> {
-        Ok(value.deref().clone()) // you clone WHAT you own -- ie. pointer to bytes
-    }
-}
+// Not able to figure out the lifetime stuff here; going with a separate helper func just for Value for now
+// impl FromValue for Value {
+//     fn from_value(value: &Value) -> Result<Self, CustomError> {
+//         Ok(value.clone())
+//     }
+// }
 
 impl FromValue for String {
     fn from_value(value: &Value) -> Result<Self, CustomError> {

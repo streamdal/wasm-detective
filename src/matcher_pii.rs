@@ -1,5 +1,4 @@
 use crate::error::CustomError;
-use crate::error::CustomError::Error;
 use protos::matcher::MatchRequest;
 
 pub fn all(_request: &MatchRequest) -> Result<bool, CustomError> {
