@@ -1,6 +1,5 @@
 use crate::error::CustomError;
 use ajson::Value;
-use std::ops::Deref;
 
 pub mod detective;
 pub mod error;
@@ -40,11 +39,10 @@ impl FromValue for f64 {
     }
 }
 
-// // Q-1: How do I do this?
-// // Q-2: How do I default this?
+// Not able to figure out the lifetime stuff here; going with a separate helper func just for Value for now
 // impl FromValue for Value {
 //     fn from_value(value: &Value) -> Result<Self, CustomError> {
-//         Ok(value.clone()) // cannot move? can I just return self?
+//         Ok(value.clone())
 //     }
 // }
 

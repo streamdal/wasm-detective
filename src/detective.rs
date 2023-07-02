@@ -95,6 +95,20 @@ pub fn parse_field<T: FromValue>(data: &[u8], path: &String) -> Result<T, Custom
     }
 }
 
+pub fn parse_field_value<'a>(data: &'a [u8], path: &'a String) -> Result<Value<'a>, CustomError> {
+    let data_as_str = str::from_utf8(data)
+        .map_err(|e| CustomError::Error(format!("unable to convert bytes to string: {}", e)))?;
+
+    match ajson::get(data_as_str, path) {
+        Ok(Some(value)) => Ok(value),
+        Ok(None) => Err(CustomError::Error(format!(
+            "path '{}' not found in data",
+            path
+        ))),
+        Err(e) => Err(CustomError::Error(format!("error parsing field: {:?}", e))),
+    }
+}
+
 fn validate_match_request(request: &MatchRequest) -> Result<(), CustomError> {
     match request.type_.enum_value() {
         Ok(value) => {
