@@ -5,6 +5,8 @@ wasm-detective
 [![Release](https://github.com/streamdal/wasm-detective/actions/workflows/release.yaml/badge.svg)](https://github.com/streamdal/wasm-detective/actions/workflows/release.yaml)
 [![Test](https://github.com/streamdal/wasm-detective/actions/workflows/pr.yaml/badge.svg)](https://github.com/streamdal/wasm-detective/actions/workflows/pr.yaml)
 
+# [THIS REPO HAS MOVED!](https://github.com/streamdal/mono)
+
 Rust helper lib for performing value matching in `streamdal/wasm` Wasm functions.
 
 For available matchers, look at the enums listed in
